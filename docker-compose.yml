@@ -8,8 +8,6 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-    environment:
-      - NODE_ENV=development
 
   backend:
     build: ./backend
