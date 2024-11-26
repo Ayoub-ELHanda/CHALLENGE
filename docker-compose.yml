@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://database:27017/ebook-platform
+
+  database:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database:/data/db
